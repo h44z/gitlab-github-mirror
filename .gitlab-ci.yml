@@ -1,2 +1,24 @@
-job1:
-  script: "/tmp/run.sh"
+before_script:
+  - ssh-keyscan -t rsa,dsa,ecdsa github.com > /etc/ssh/ssh_known_hosts
+
+variables:
+  UPSTREAM_REPOSITORY: "git@github.com:h44z/atestproject.git"
+  UPSTREAM_BRANCH: "master"
+
+mirror-master:
+  stage: deploy
+  only:
+    - master
+  script:
+    - git remote add upstream $UPSTREAM_REPOSITORY || true
+    - git fetch upstream
+    - git push --progress upstream HEAD:$UPSTREAM_BRANCH
+
+mirror-tags:
+  stage: deploy
+  only:
+    - tags
+  script:
+    - git remote add upstream $UPSTREAM_REPOSITORY || true
+    - git fetch upstream
+    - git push --progress --tags upstream
