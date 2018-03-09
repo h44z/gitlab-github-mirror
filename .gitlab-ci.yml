@@ -7,18 +7,18 @@ variables:
 
 mirror-master:
   stage: deploy
-  only:
-    - master
+#  only:
+#    - master
   script:
-    - git remote add upstream $UPSTREAM_REPOSITORY || true
-    - git fetch upstream
-    - git push --progress upstream HEAD:$UPSTREAM_BRANCH
+    - git remote add --mirror upstream $UPSTREAM_REPOSITORY || true
+#    - git fetch upstream
+#    - git push --progress upstream HEAD:$UPSTREAM_BRANCH
 
-mirror-tags:
-  stage: deploy
-  only:
-    - tags
-  script:
-    - git remote add upstream $UPSTREAM_REPOSITORY || true
-    - git fetch upstream
-    - git push --progress --tags upstream
+#mirror-tags:
+#  stage: deploy
+#  only:
+#    - tags
+#  script:
+#    - git remote add upstream $UPSTREAM_REPOSITORY || true
+#    - git fetch upstream
+#    - git push --progress --tags upstream
