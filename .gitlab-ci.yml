@@ -1,5 +1,5 @@
-before_script:
-  - ssh-keyscan -t rsa,dsa,ecdsa github.com > /etc/ssh/ssh_known_hosts
+#before_script:
+#  - ssh-keyscan -t rsa,dsa,ecdsa github.com > /etc/ssh/ssh_known_hosts
 
 variables:
   UPSTREAM_REPOSITORY: "git@github.com:h44z/atestproject.git"
