@@ -11,6 +11,7 @@ mirror-master:
 #    - master
   script:
     - git remote add --mirror=push github $UPSTREAM_REPOSITORY || true
+    - git push --quiet github
 #    - git fetch upstream
 #    - git push --progress upstream HEAD:$UPSTREAM_BRANCH
 
