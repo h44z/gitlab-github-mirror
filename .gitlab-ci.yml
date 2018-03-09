@@ -1,3 +1,2 @@
-before_script:
-  - /tmp/run.sh
- 
+job1:
+  script: "/tmp/run.sh"
