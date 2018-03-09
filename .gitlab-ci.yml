@@ -10,7 +10,7 @@ mirror-master:
 #  only:
 #    - master
   script:
-    - git remote add --mirror=push upstream $UPSTREAM_REPOSITORY || true
+    - git remote add --mirror=push github $UPSTREAM_REPOSITORY || true
 #    - git fetch upstream
 #    - git push --progress upstream HEAD:$UPSTREAM_BRANCH
 
