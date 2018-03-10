@@ -4,7 +4,7 @@ stages:
   - mirror
   
 variables:
-  MIRROR_REPOSITORY: "git@github.com:h44z/atestproject.git"
+  MIRROR_REPOSITORY: "git@github.com:h44z/gitlab-github-mirror.git"
 
 mirror-github:
   stage: mirror
