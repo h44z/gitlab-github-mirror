@@ -20,12 +20,13 @@ mirror-github:
     # overwrite your user's ssh config
     #- mkdir -p ~/.ssh
     #- cp deploy/known_hosts ~/.ssh/known_hosts
-    # Do a bare clone of the repository
+    # Do a mirror clone of the repository
     - git clone --mirror $CI_REPOSITORY_URL
     # Mirror push it to the destination
     - cd $CI_PROJECT_NAME.git
     - git push --mirror $MIRROR_REPOSITORY
-    - cd ..; rm $CI_PROJECT_NAME.git
+    # Cleanup
+    - cd ..; rm -rf $CI_PROJECT_NAME.git
 
 #mirror-master:
 #  stage: deploy
