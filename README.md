@@ -37,3 +37,5 @@ $ cat .ssh/id_rsa.pub
 Add the key to your github account.
 
 Now just edit the `.gitlab-ci.yml` file in your repo to fit your needs. Enjoy the gitlab to github mirroring :)
+
+Warning/Hint: changes on github will be overwritten!!
