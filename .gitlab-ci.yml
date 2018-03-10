@@ -1,17 +1,39 @@
 #before_script:
 #  - ssh-keyscan -t rsa,dsa,ecdsa github.com > /etc/ssh/ssh_known_hosts
-
+stages:
+  - mirror
+  
 variables:
-  UPSTREAM_REPOSITORY: "git@github.com:h44z/atestproject.git"
-  UPSTREAM_BRANCH: "master"
+  MIRROR_REPOSITORY: "git@github.com:h44z/atestproject.git"
+  MIRROR_BRANCH: "master"
 
-mirror-master:
-  stage: deploy
+mirror-github:
+  stage: mirror
+  cache: {}
+  script:
+    # run ssh-agent
+    #- eval $(ssh-agent -s)
+    # add appropriate private key to the agent store
+    #- ssh-add <(echo "$MIRROR_KEY")
+    # set known hosts list
+    # WARNING: use only in docker container, if you use it with shell you will
+    # overwrite your user's ssh config
+    #- mkdir -p ~/.ssh
+    #- cp deploy/known_hosts ~/.ssh/known_hosts
+    # Do a bare clone of the repository
+    - git clone --mirror $CI_REPOSITORY_URL
+    # Mirror push it to the destination
+    - cd $CI_PROJECT_NAME.git
+    - git push --mirror $MIRROR_REPOSITORY
+    - cd ..; rm $CI_PROJECT_NAME.git
+
+#mirror-master:
+#  stage: deploy
 #  only:
 #    - master
-  script:
-    - git remote add --mirror=push github $UPSTREAM_REPOSITORY || true
-    - git push --quiet github
+#  script:
+#    - git remote add --mirror=push github $UPSTREAM_REPOSITORY || true
+#    - git push --quiet github
 #    - git fetch upstream
 #    - git push --progress upstream HEAD:$UPSTREAM_BRANCH
 
